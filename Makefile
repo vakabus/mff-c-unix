@@ -1,7 +1,8 @@
 SUBDIRS=l01
 
 
-COMPILER_OPTIONS=-std=c99 -g -Wall -Wextra -pedantic -O0 -fsanitize=address -fsanitize-address-use-after-scope -fno-omit-frame-pointer
+export CFLAGS=-std=c99 -g -Wall -Wextra -pedantic -O0
+export SANITIZER=-fsanitize=address -fsanitize-address-use-after-scope -fno-omit-frame-pointer
 
 latest:
 	@for subdir in $(SUBDIRS); do \
@@ -9,11 +10,7 @@ latest:
 	    break ; \
 	done
 
+%:
+	$(foreach subdir,$(SUBDIRS),$(MAKE) -C $(subdir) $@;)
 
-all:
-	$(foreach subdir,$(SUBDIRS),$(MAKE) -C $(subdir);)
-
-clean:
-	$(foreach subdir,$(SUBDIRS),$(MAKE) -C $(subdir) clean;)
-
-.PHONY: all latest
+.PHONY: latest %

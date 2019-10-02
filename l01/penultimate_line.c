@@ -5,13 +5,10 @@
 #include <stdlib.h>
 
 
-int main(int argc, char ** argv) {
+int main() {
     char* buff[2];
     buff[0] = NULL;
     buff[1] = NULL;
-    size_t sizes[2];
-    sizes[0] = 0;
-    sizes[1] = 0;
 
     bool current = true;
 
@@ -30,7 +27,6 @@ int main(int argc, char ** argv) {
 
         free(buff[current]);
         buff[current] = tmpbuff;
-        sizes[current] = tmpsize;
 
         // vymena bufferu
         current = !current;
